@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> LinioExp </title>
+</head>
+<body>
+    <h1> LinioExp </h1>
+    <h3> Categorias </h3>
+    <ul>
+        {% for categoria in object_list %}
+        <li>
+            <a href="{% url 'categoria_detail' categoria.pk %}">
+               {{ categoria.nombre}} </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

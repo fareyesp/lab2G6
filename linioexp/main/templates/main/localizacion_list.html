@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> LinioExp </title>
+</head>
+<body>
+    <h1> LinioExp </h1>
+    <h3> Localizaciones </h3>
+    <ul>
+        {% for localizacion in object_list %}
+        <li>
+            <a href="{% url 'localizacion_detail' localizacion.pk %}">
+               {{ localizacion.distrito}} </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
