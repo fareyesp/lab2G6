@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title> LinioExp </title>
-  </head>
-  <body>
-    <h1> Linio Exp </h1>
-    <hr>
+{% extends "base.html" %}
+
+{% block content %}
     <h3> {{ object.ruc }} </h3>
     <ul>
       <li><strong>Ruc:</strong> {{ object.ruc }}</li>
@@ -18,5 +12,4 @@
       <li><a href="{% url 'proveedor_list' %}">Ver Lista de Proveedores</a></li>
       <li><a href="{% url 'home' %}">Inicio</a></li>
     </ul>
-  </body>
-</html>
+{% endblock %}

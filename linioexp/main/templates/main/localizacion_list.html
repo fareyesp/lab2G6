@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title> LinioExp </title>
-</head>
-<body>
-    <h1> LinioExp </h1>
+{% extends "base.html" %}
+
+{% block content %}
     <h3> Localizaciones </h3>
     <ul>
         {% for localizacion in object_list %}
@@ -15,6 +10,4 @@
         </li>
         {% endfor %}
     </ul>
-
-</body>
-</html>
+{% endblock %}

@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title> LinioExp </title>
-</head>
-<body>
-    <h1> LinioExp </h1>
+{% extends "base.html" %}
+
+{% block content %}
     <h3> Productos </h3>
     <ul>
         {% for producto in object_list%}
@@ -17,5 +12,4 @@
         {% endfor %}
     </ul>
 
-</body>
-</html>
+{% endblock %}
