@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h3> Historial de Pedidos </h3>
+<ul>
+    {%for Pedido in  object_list%}
+    <li>
+        <a href="{%url 'pedidos-cliente'%}"> Pedido {{Pedido.pk}} del {{Pedido.fecha_creacion}}</a>
+    </li>
+    {% empty %}
+    <div class="content">
+        <h6>No tiene pedidos</h6>
+    </div>
+    {%endfor%}
+</ul>
+{% endblock %}

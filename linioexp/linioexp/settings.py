@@ -126,3 +126,8 @@ EMAIL_HOST = 'smtp.mailtrap.io'
 EMAIL_HOST_USER = '65fb27a6fe5abe'
 EMAIL_HOST_PASSWORD = '8dbe823cd95286'
 EMAIL_PORT = '2525'
+
+import os
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

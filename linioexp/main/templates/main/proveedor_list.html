@@ -1,13 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h3> Proveedores </h3>
+    <h3> Comercios </h3>
+    <div class="content">
+        <form action="{% url 'proveedor_list' %}" method="get">
+          <input class="input is-rounded" type="text" name="q1" placeholder="Busca tu comercio...">
+        </form>
+    </div>
     <ul>
         {% for proveedor in object_list %}
         <li>
             <a href="{% url 'proveedor_detail' proveedor.pk %}">
-               {{ proveedor.ruc}} </a>
+               {{ proveedor.razon_social}} </a>
         </li>
+        {% empty %}
+            <div class="content">
+                <h6> Comercio no encontrado</h6>
+            </div>
         {% endfor %}
     </ul>
 {% endblock %}

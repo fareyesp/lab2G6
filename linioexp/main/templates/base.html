@@ -2,12 +2,50 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <title> LinioExp </title>
   </head>
   <body>
-    <h1> Linio Exp </h1>
+  <section class="section">
+    <div class="container">
+      <h1 class="title is-1"> Linio Express </h1>
+      <hr>
 
-    {% block content %}
-    {% endblock %}
+      {% if user.is_authenticated %}
+    <h3> Hola! {{ user.get_username }} </h3>
+    <p>
+      <a href="{% url 'logout' %}">Cierra Sesion</a>&nbsp
+      <a href="{% url 'pedido-detail' %}">Ver carrito</a>&nbsp
+      <a href="{% url 'pedidos-cliente' %}">Ver Pedidos</a>
+    </p>
+    {% else %}
+    <h3> Hola </h3>
+    <p>
+      <a href="{% url 'login' %}">Inicia Sesion</a> o
+      <a href="{% url 'register' %}">Registrate</a>
+
+    </p>
+
+
+    {% endif %}
+
+      <ul>
+        <a href="{% url 'home' %}">Inicio</a>
+        &nbsp
+        <a href="{% url 'product_list' %}">Productos</a>
+        &nbsp
+        <a href="{% url 'categoria_list' %}">Categoria</a>
+        &nbsp
+        <a href="{% url 'proveedor_list' %}">Comercios</a>
+
+    </ul>
+
+
+
+      {% block content %}
+      {% endblock %}
+    </div>
+  </section>
   </body>
 </html>
