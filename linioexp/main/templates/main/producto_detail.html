@@ -32,11 +32,11 @@
       <li><strong>Proveedor:</strong> {{ object.proveedor }}</li>
     </ul>
     <div class="block">
-        <a href="{% if user.is_authenticated %} {% url 'pedido-detail' %} {% else %} {% endif %}" class='button {% if user.is_authenticated %} is-primary {% else %} is-primary {% endif %}'>
+        <a href="{% if user.is_authenticated %} {% url 'add-to-cart' product_pk=object.pk %} {% else %} {% endif %} " class='button {% if user.is_authenticated %} is-primary {% else %} is-danger {% endif %}' >
           Añadir al carrito
         </a>
             <a href="{% if user.is_authenticated %} {% url 'pedido-detail' %} {% else %} {% endif %}" class='button {% if user.is_authenticated %} is-danger {% else %} is-danger {% endif %}'>
-          Ver carrito
+                Ver carrito
         </a>
         </a>
 
