@@ -1,22 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h3> Comercios </h3>
+&nbsp
+    <h3 class="subtitle"> Comercios </h3>
     <div class="content">
         <form action="{% url 'proveedor_list' %}" method="get">
           <input class="input is-rounded" type="text" name="q1" placeholder="Busca tu comercio...">
         </form>
     </div>
-    <ul>
-        {% for proveedor in object_list %}
-        <li>
-            <a href="{% url 'proveedor_detail' proveedor.pk %}">
-               {{ proveedor.razon_social}} </a>
-        </li>
-        {% empty %}
-            <div class="content">
-                <h6> Comercio no encontrado</h6>
-            </div>
-        {% endfor %}
-    </ul>
+
+    <div class="columns is-multiline">
+            {% for proveedor in object_list %}
+                <div class="column is-4">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image">
+                                <img src="{{ proveedor.images.first.image.url|default:'https://via.placeholder.com/128' }}" alt="Imagen no disponible">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <h6>
+                                <a href="{% url 'proveedor_detail' proveedor.pk %}">
+                                    {{ proveedor.razon_social }}
+                                </a>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="content">
+                    <h6> No hay comercios disponibles.</h6>
+                </div>
+            {% endfor %}
+        </div>
 {% endblock %}

@@ -4,7 +4,7 @@
 <ul>
     {%for Pedido in  object_list%}
     <li>
-        <a href="{%url 'pedidos-cliente'%}"> Pedido {{Pedido.pk}} del {{Pedido.fecha_creacion}}</a>
+        <a href="{{Pedido.id}}"> Pedido {{Pedido.pk}} del {{Pedido.fecha_creacion}}</a>
     </li>
     {% empty %}
     <div class="content">

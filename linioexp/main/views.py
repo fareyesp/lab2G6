@@ -17,7 +17,7 @@ class HomePageView(TemplateView):
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    context['latest_products'] = Producto.objects.all()[:5]
+    context['latest_products'] = Producto.objects.all()[:8]
 
     return context
 
@@ -60,11 +60,21 @@ class ProveedorListView(ListView):
 class ProveedorDetailView(DetailView):
   model = Proveedor
 
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['productos_prov'] = context['object'].producto_set.all()
+    return context
+
 class CategoriaListView(ListView):
   model = Categoria
 
 class CategoriaDetailView(DetailView):
   model = Categoria
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['productos_cat'] = context['object'].producto_set.all()
+    return context
 
 class LocalizacionListView(ListView):
   model = Localizacion
@@ -96,10 +106,11 @@ class RegistrationView(FormView):
     documento_identidad = form.cleaned_data['documento_identidad']
     fecha_nacimiento = form.cleaned_data['fecha_nacimiento']
     estado = form.cleaned_data['estado']
+    telefono = form.cleaned_data['telefono']
     genero = form.cleaned_data['genero']
 
     user_profile = Profile.objects.create(user=user, documento_identidad=documento_identidad,
-                                          fecha_nacimiento=fecha_nacimiento, estado=estado, genero=genero)
+                                          fecha_nacimiento=fecha_nacimiento, estado=estado, telefono=telefono,genero=genero)
     user_profile.save()
 
     # Create Cliente if needed
@@ -256,6 +267,21 @@ class PedidosClienteListView(ListView):
 class PedidosClienteDetailView(DetailView):
   model = Pedido
   template_name = "main/pedidos_cliente_detail.html"
+
+class CancelarPedido(View):
+  def get(self, request, pedido_pk):
+    #obtener el cliente
+    user_profile = Profile.objects.get(user=request.user)
+    cliente = Cliente.objects.get(user_profile=user_profile)
+    #obtiene el codigo del pedido
+    pedidocod = Pedido.objects.get(pk=pedido_pk)
+    pedido = Pedido.objects.get(cliente=cliente, pk=pedidocod.pk)
+    #cambio el estado del pedido y guardar cambios
+    pedido.estado="CAN"
+    pedido.save()
+    #hace que te quedes en la misma página
+    return redirect(request.META['HTTP_REFERER'])
+
 
 
 

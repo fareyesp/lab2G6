@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <hr>
+    <ul>
+      <li><a href="{% url 'product_list' %}">Ver Lista de Productos</a></li>
+    </ul>
+    </hr>
+<hr>
 
     <h3> {{ object.nombre }} </h3>
     <div class="columns">
@@ -26,17 +32,16 @@
       <li><strong>Proveedor:</strong> {{ object.proveedor }}</li>
     </ul>
     <div class="block">
-        <a href="{% url 'add-to-cart' product_pk=object.pk %}" class='button is-primary'>
+        <a href="{% if user.is_authenticated %} {% url 'pedido-detail' %} {% else %} {% endif %}" class='button {% if user.is_authenticated %} is-primary {% else %} is-primary {% endif %}'>
           Añadir al carrito
         </a>
-        <a href="{% url 'pedido-detail' %}" class='button'>
+            <a href="{% if user.is_authenticated %} {% url 'pedido-detail' %} {% else %} {% endif %}" class='button {% if user.is_authenticated %} is-danger {% else %} is-danger {% endif %}'>
           Ver carrito
         </a>
+        </a>
+
     </div>
-    <hr>
-    <ul>
-      <li><a href="{% url 'product_list' %}">Ver Lista de Productos</a></li>
-      <li><a href="{% url 'home' %}">Inicio</a></li>
-    </ul>
 
 {% endblock %}
+
+

@@ -1,7 +1,36 @@
 {% extends "base.html" %}
-
 {% block content %}
-{{object.pk}}
-<p>hola</p>
+&nbsp
+<h3 class="subtitle"><strong>Pedido {{object.pk}} del {{object.fecha_creacion}}</strong></h3>
+
+<ul>
+      <li><strong>Fecha de creación:</strong> {{ object.fecha_creacion }}</li>
+      <li><strong>Estado:</strong> {{ object.estado }}</li>
+      <li><strong>Dirección de entrega:</strong> {{ object.direccion_entrega }}</li>
+      <li><strong>Monto total del pedido:</strong> {{ object.get_total }}</li>
+
+</ul>
+
+    {% if object.estado == 'PAG' %}
+        <p>
+            {% if object.repartidor is None %}
+            <ul><strong>Repartidor:</strong> No hay repartidores disponible</ul>
+            {% else %}
+            <ul><strong>Repartidor:</strong> {{ object.repartidor.user_profile.user.get_full_name }}</ul>
+            <ul><strong>Numero del repartidor:</strong> {{ object.repartidor.user_profile.telefono }}</ul>
+            {% endif %}
+        </p>
+
+        <a href="{% url 'cancelar' object.pk %}" class="button is-danger">Cancelar Pedido</a>
+        {% elif object.estado == 'CAN' %}
+            <ul><strong>Nuevo monto a pagar por cancelación </strong></ul>
+            <li><strong>Tarifa de cancelación:</strong> {{ object.tarifa }}</li>
+
+    {% else %}
+        <ul class="button is-danger">Cancelar Pedido</ul>
+        <ul>*No se puede cancelar el pedido</ul>
+
+
+    {% endif %}
 
 {% endblock %}

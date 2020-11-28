@@ -8,7 +8,8 @@ class Profile(models.Model):
     # Atributos adicionales para el usuario
     documento_identidad = models.CharField(max_length=8)
     fecha_nacimiento = models.DateField()
-    estado = models.CharField(max_length=3)
+    estado = models.CharField(max_length=20)
+    telefono = models.CharField(max_length=9)
     ## Opciones de genero
     MASCULINO = 'MA'
     FEMENINO = 'FE'

@@ -12,33 +12,33 @@
     {% endif %}
 
     <hr>
-    <h5> Últimos productos </h5>
-    <ul>
-      {% for producto in latest_products %}
+    <h5><strong> Últimos productos</strong> </h5>
         <div class="columns is-multiline">
-        <div class="column is-4">
-            <div class="card">
-                <div class="card-image">
-                    <figure class="image">
-                        <img src="{{ producto.images.first.image.url|default:'https://via.placeholder.com/128' }}" alt="Imagen no disponible">
-                    </figure>
-                </div>
-                <div class="card-content">
-                    <h6>
-                        <a href="{% url 'product_detail' producto.pk %}">
-                            {{ producto.nombre }}
-                        </a>
-                    </h6>
-                    <p>$ {{ producto.precio }}</p>
-                </div>
-            </div>
+        {% for producto in latest_products %}
+            <div class="column is-one-quarter">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image">
+                                    <img src="{{ producto.images.first.image.url|default:'https://via.placeholder.com/128' }}" alt="Imagen no disponible">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <h6>
+                                    <a href="{% url 'product_detail' producto.pk %}">
+                                        {{ producto.nombre }}
+                                    </a>
+                                </h6>
+                                <p>$ {{ producto.precio }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="content">
+                        &nbsp
+                        <h6>Aun no hay productos disponibles.</h6>
+                    </div>
+            {% endfor %}
         </div>
-        </div>
-
-      {% empty %}
-        <li>Aun no hay productos disponibles.</li>
-      {% endfor %}
-    </ul>
     <hr>
 
 

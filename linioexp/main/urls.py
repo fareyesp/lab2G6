@@ -21,6 +21,7 @@ urlpatterns = [
     path('complete_payment/', views.CompletePaymentView.as_view(), name='complete-payment'),
     path('pedidos_cliente/',views.PedidosClienteListView.as_view(), name='pedidos-cliente'),
     path('pedidos_cliente/<int:pk>',views.PedidosClienteDetailView.as_view(), name='pedidos-cliente-detail'),
+    path('cancelar/<int:pedido_pk>',views.CancelarPedido.as_view(), name='cancelar')
 
 ]
 
